@@ -30,9 +30,25 @@ export class MessageformComponent {
 
   ngOnInit() {}
 
+  linkify(text) {
+    const urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
+    return text.replace(urlRegex, function(url) {
+      return '<a href="' + url + '">' + url + "</a>";
+    });
+  }
+
+  imigify(text) {
+    const pattern = /https?:\/\/([a-z0-9-.\/_#\^\?=:\,%@]*)\.(jpg|png|gif|jpeg)\b/gi;
+    return text.match(pattern);
+  }
+
   submitForm() {
-    this.db
-      .list("messages")
-      .push({ ...this.form.value, timestamp: Date.now() });
+    this.db.list("messages").push({
+      ...this.form.value,
+      text: this.linkify(this.form.value.text),
+      images: this.imigify(this.form.value.text),
+      links: [],
+      timestamp: Date.now()
+    });
   }
 }
