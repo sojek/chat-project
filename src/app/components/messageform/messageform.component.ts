@@ -4,7 +4,8 @@ import { Component, OnInit } from "@angular/core";
   selector: "app-messageform",
   template: `
     <form>
-      <input />
+      from: <input />
+      message: <textarea></textarea>
     </form>
   `,
   styleUrls: ["./messageform.component.css"]
