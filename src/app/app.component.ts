@@ -1,9 +1,13 @@
-import { Component } from '@angular/core';
-import { AngularFireDatabase, AngularFireList, SnapshotAction } from 'angularfire2/database';
-import { Observable } from 'rxjs/Observable';
+import { Component } from "@angular/core";
+import {
+  AngularFireDatabase,
+  AngularFireList,
+  SnapshotAction
+} from "angularfire2/database";
+import { Observable } from "rxjs/Observable";
 
 @Component({
-  selector: 'app-root',
+  selector: "app-root",
   template: `
   <ul>
     <li class="message" *ngFor="let item of items | async">
@@ -12,9 +16,11 @@ import { Observable } from 'rxjs/Observable';
       <div class="content">{{ item.text }}</div>
     </li>
   </ul>
+  <app-messageform></app-messageform>
   `,
-  styles: [`    
-    ul {  
+  styles: [
+    `
+    ul {
       list-style-type: none;
       margin: 0;
       padding: 0;
@@ -28,25 +34,24 @@ import { Observable } from 'rxjs/Observable';
       padding: 0.5em;
       margin-bottom: 0.5em;
     }
-    
+
     .from {
       font-size: 8px;
     }
-    
     .timestamp {
       position: absolute;
       right: 16px;
       top: 0;
       font-size: 11px;
     }
-  `]
+  `
+  ]
 })
-
 export class AppComponent {
   items;
   constructor(db: AngularFireDatabase) {
     this.items = db
-      .list('messages')
+      .list("messages")
       .valueChanges()
       .map(e => e.sort(this.sortByTimestamp));
   }
