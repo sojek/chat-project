@@ -17,7 +17,7 @@ import { Observable } from "rxjs/Observable";
 @Component({
   selector: "app-root",
   template: `
-  <ul>
+  <ul class="messages">
     <li class="message" *ngFor="let item of items | async">
       <div class="timestamp">{{ item.timestamp }}</div>
       <div class="from">{{ item.from }}</div>
@@ -28,18 +28,26 @@ import { Observable } from "rxjs/Observable";
     </li>
   </ul>
   <app-messageform></app-messageform>
-  <ul *ngFor="let item of recent | async">
-    <li>
-    <img src="{{item}}" width="50" height="50">
+  <ul class="sidebar">
+    <li  *ngFor="let item of recent | async">
+      <img src="{{item}}" width="50" height="50">
     </li>
   </ul>
   `,
   styles: [
-    `
+    `      
+    :host {
+      display: flex;
+    } 
+    
     ul {
       list-style-type: none;
       margin: 0;
       padding: 0;
+    }
+    
+    .messages {
+      margin-right: 60px;
     }
 
     .message {
@@ -54,12 +62,19 @@ import { Observable } from "rxjs/Observable";
     .from {
       font-size: 8px;
     }
+    
     .timestamp {
       position: absolute;
       right: 16px;
       top: 0;
       font-size: 11px;
     }
+      
+      .sidebar {
+        position: fixed;
+        right: 0;
+        margin-right: 10px;
+      }
   `
   ]
 })

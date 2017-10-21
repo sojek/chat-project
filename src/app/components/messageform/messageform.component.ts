@@ -6,15 +6,29 @@ import { AngularFireDatabase } from "angularfire2/database";
   selector: "app-messageform",
   template: `
     <form [formGroup]="form" (ngSubmit)="submitForm()">
-    from: <input [formControlName]="'from'" />
-    message: <textarea  [formControlName]="'text'"></textarea>
-    <div>
-      <button type="submit" [disabled]="form.invalid">SEND</button>
-    </div>
-
+      from: <input [formControlName]="'from'" />
+      message: <textarea  [formControlName]="'text'"></textarea>
+      <div>
+        <button type="submit" [disabled]="form.invalid">SEND</button>
+      </div>
     </form>
   `,
-  styleUrls: ["./messageform.component.css"]
+  styles: [`
+    :host {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      background: white;
+      width: 100%;
+      display: flex;
+      padding: 1em;
+    }
+    
+    form {
+      display: flex;
+      align-items: center;
+    }
+  `]
 })
 export class MessageformComponent {
   public form: FormGroup;
