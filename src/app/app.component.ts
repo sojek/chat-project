@@ -36,7 +36,7 @@ import { Observable } from "rxjs/Observable";
     }
 
     .from {
-      font-size: 8px;
+      font-size: 11px;
     }
     .timestamp {
       position: absolute;
