@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AngularFireDatabase } from "angularfire2/database";
 
@@ -31,6 +31,8 @@ export class MessageformComponent {
   ngOnInit() {}
 
   submitForm() {
-    this.db.list("messages").push(this.form.value);
+    this.db
+      .list("messages")
+      .push({ ...this.form.value, timestamp: Date.now() });
   }
 }
